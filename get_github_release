@@ -30,10 +30,10 @@ shift $(($OPTIND - 1))
 BASE_URL=${1}
 TARGET_FILE=${2}
 URL=`curl -s ${BASE_URL}/releases | grep ${TARGET_FILE} | grep -Po '(?<=href=")[^"]*' | head -n 1 | sed -e "s|^|https://github.com|g"`
-if [ ${VERBOSE} ] ; then echo ${URL};fi
+if "${VERBOSE}" ; then echo ${URL};fi
 TARGET_URL=`curl -I -Ls -o /dev/null -w %{url_effective} ${URL}`
-if [ ${VERBOSE} ] ; then echo ${TARGET_URL};fi
-if [ ${TEST_MODE} ] ; then
+if "${VERBOSE}" ; then echo ${TARGET_URL};fi
+if "${TEST_MODE}" ; then
 	echo ${TARGET_URL}
 	exit
 fi
